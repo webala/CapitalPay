@@ -3,7 +3,7 @@ import groupIPhones from "@/assets/groupIPhones.png";
 
 const ExploreSection = () => {
   return (
-    <section className="relative py-20 bg-gradient-to-r from-[#892887] via-[#E94258] to-[#F27224]">
+    <section className="relative bg-gradient-to-r from-[#892887] via-[#E94258] to-[#F27224]">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-transparent" />
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#892887]/30 to-transparent" />
@@ -24,7 +24,7 @@ const ExploreSection = () => {
               the world. Experience endless possibilities now.
             </p>
 
-            <Button variant="cta" size="lg">
+            <Button variant="cta" size="lg" className="rounded-3xl">
               DOWNLOAD APP
             </Button>
           </div>

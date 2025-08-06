@@ -1,29 +1,12 @@
 import { Card } from "@/components/ui/card";
-import { Smartphone, CreditCard, Wallet } from "lucide-react";
+import { Smartphone, Wallet } from "lucide-react";
 import iPhone from "@/assets/iphone.png";
+import linkBank from "@/assets/linkBank.png";
+import moneyTransfer from "@/assets/moneyTransfer.png";
+import wallet from "@/assets/wallet.png";
+import airtime from "@/assets/airtime.png";
 
 const FreedomSection = () => {
-  const features = [
-    {
-      icon: <Smartphone className="w-8 h-8 text-accent" />,
-      title: "MOBILE MONEY TRANSFERS",
-      description:
-        "Send and receive money from one part of your country to another, or across borders with ease",
-    },
-    {
-      icon: <Wallet className="w-8 h-8 text-accent" />,
-      title: "ENJOY MULTI-CURRENCY WALLETS",
-      description:
-        "Experience a multi-currency wallet, support for NGN, USD, GBP, EUR and many more!",
-    },
-    {
-      icon: <CreditCard className="w-8 h-8 text-accent" />,
-      title: "LINK YOUR BANK ACCOUNTS",
-      description:
-        "Link any of your accounts and sync instantly between your phone and our vast growing platform",
-    },
-  ];
-
   return (
     <section className="relative py-20 bg-gradient-to-b from-background to-secondary/20">
       {/* Background Effects */}
@@ -41,14 +24,12 @@ const FreedomSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-3 md:gap-12 items-center">
+        <div className="grid md:grid-cols-3 gap-3 items-center">
           {/* Left - Features */}
 
-          <Card className="px-4 bg-[#002C62] py-16 border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+          <Card className="px-4 bg-[#002C62] py-16 border-border/50 hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-3xl">
             <div className="flex flex-col items-start space-y-4">
-              <div className="p-3 bg-accent/10 rounded-lg">
-                <Smartphone className="w-8 h-8 text-[#F27224]" />
-              </div>
+              <img src={moneyTransfer} alt="money-transfer" />
               <div>
                 <h3 className="text-lg font-bold text-foreground mb-2">
                   MOBILE MONEY TRANSFERS
@@ -60,11 +41,8 @@ const FreedomSection = () => {
               </div>
             </div>
           </Card>
-          <Card className="px-4 bg-gradient-to-br from-[#892887] via-[#E94258] to-[#F27224] pt-10 border-border/50 lg:row-span-2 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+          <Card className="px-4 bg-gradient-to-br from-[#892887] via-[#E94258] to-[#F27224] h-full w-full pt-10 border-border/50 lg:row-span-2 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
             <div className="flex flex-col items-start space-y-4">
-              <div className="p-3 bg-accent/10 rounded-lg">
-                <Smartphone className="w-8 h-8 text-[#F27224]" />
-              </div>
               <div>
                 <h3 className="text-lg font-bold text-foreground mb-2">
                   PAY BILLS
@@ -77,11 +55,9 @@ const FreedomSection = () => {
               <img src={iPhone} alt="iPhone" className="w-full" />
             </div>
           </Card>
-          <Card className="px-4 bg-[#002C62] py-16 border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+          <Card className="px-4 bg-[#002C62] py-16 border-border/50 hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-2xl">
             <div className="flex flex-col items-start space-y-4">
-              <div className="p-3 bg-accent/10 rounded-lg">
-                <Wallet className="w-8 h-8 text-[#F27224]" />
-              </div>
+              <img src={wallet} alt="wallet" />
               <div>
                 <h3 className="text-lg font-bold text-foreground mb-2">
                   ENJOY MULTI-CURRENCY WALLETS
@@ -94,34 +70,31 @@ const FreedomSection = () => {
             </div>
           </Card>
 
-          <Card className="px-4 bg-[#002C62] py-16 border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+          <Card className="px-4 bg-[#002C62] h-full w-full py-16 border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
             <div className="flex flex-col items-start space-y-4">
-              <div className="p-3 bg-accent/10 rounded-lg">
-                <Smartphone className="w-8 h-8 text-[#F27224]" />
-              </div>
+              <img src={airtime} alt="airtime" />
               <div>
                 <h3 className="text-lg font-bold text-foreground mb-2">
-                  MOBILE MONEY TRANSFERS
+                  AIRTIME TOP-UP
                 </h3>
                 <p className="text-muted-foreground">
-                  Send and receive money from one part of your country to
-                  another, or across borders with ease
+                  Top-up airtime directly from capital pay mobile money to your
+                  phone or to those you hold dear in a quick and simple way
                 </p>
               </div>
             </div>
           </Card>
-          <Card className="px-4 bg-[#002C62] py-16 border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+          <Card className="px-4 bg-[#002C62] py-16 h-full w-full border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
             <div className="flex flex-col items-start space-y-4">
-              <div className="p-3 bg-accent/10 rounded-lg">
-                <Smartphone className="w-8 h-8 text-[#F27224]" />
-              </div>
+              <img src={linkBank} alt="link-bank" />
               <div>
                 <h3 className="text-lg font-bold text-foreground mb-2">
-                  MOBILE MONEY TRANSFERS
+                  LINK YOUR BANK ACCOUNTS
                 </h3>
                 <p className="text-muted-foreground">
-                  Send and receive money from one part of your country to
-                  another, or across borders with ease
+                  Need to transfer funds between your bank account and your
+                  phone? CapitalPay conveniently and securely connects to any
+                  bank
                 </p>
               </div>
             </div>

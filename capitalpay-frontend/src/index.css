@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tailwindcss/theme" layer(theme);
 
 /* Tailwind v4 Theme Configuration */
 :root {
@@ -89,6 +90,7 @@
 }
 
 @theme {
+  /* Custom shadcn/ui colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -109,6 +111,9 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --border-radius: var(--radius);
+
+  /* Font Family */
+  --font-family-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 * {
@@ -118,4 +123,5 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }

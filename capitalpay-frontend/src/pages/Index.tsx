@@ -7,10 +7,11 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import GetStartedSection from "@/components/GetStartedSection";
 import NewsSection from "@/components/NewsSection";
 import Footer from "@/components/Footer";
+import VirtualCardApplication from "@/components/VirtualCardApplication";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
       <HeroSection />
       <FreedomSection />
@@ -19,6 +20,7 @@ const Index = () => {
       <TestimonialsSection />
       <GetStartedSection />
       <NewsSection />
+      <VirtualCardApplication />
       <Footer />
     </div>
   );

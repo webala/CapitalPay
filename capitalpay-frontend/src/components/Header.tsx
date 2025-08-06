@@ -8,7 +8,7 @@ const Header = () => {
 
   const navigation = [
     { name: "HOME", href: "#" },
-    { name: "ABOUT US", href: "#" },
+    { name: "ABOUT US", href: "/about" },
     { name: "BUSINESS", href: "#" },
     { name: "PERSONAL", href: "#" },
     { name: "BLOG", href: "#" },
@@ -22,6 +22,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <img src={logo} alt="CapitalPay" className="h-8 w-auto" />
+            <p className="font-bold">CapitalPay</p>
           </div>
 
           {/* Desktop Navigation */}
@@ -39,7 +40,7 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:block">
-            <Button variant="cta" size="default">
+            <Button variant="cta" size="default" className="rounded-3xl">
               DOWNLOAD APP
             </Button>
           </div>
@@ -66,7 +67,11 @@ const Header = () => {
                   {item.name}
                 </a>
               ))}
-              <Button variant="cta" size="default" className="mt-4 w-full">
+              <Button
+                variant="cta"
+                size="default"
+                className="mt-4 w-full rounded-2xl"
+              >
                 DOWNLOAD APP
               </Button>
             </nav>

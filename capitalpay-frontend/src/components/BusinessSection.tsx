@@ -1,24 +1,33 @@
 import { Card } from "@/components/ui/card";
 import { Shield, Clock, CreditCard, Repeat } from "lucide-react";
 import phones from "@/assets/phones.png";
+import receivePayments from "@/assets/receivePayments.png";
+import bulkPayments from "@/assets/bulkPayments.png";
+import processSalaries from "@/assets/processSalaries.png";
 
 const BusinessSection = () => {
   const features = [
     {
       icon: <CreditCard className="w-6 h-6 text-accent" />,
+      image: receivePayments,
       title: "Receive payments",
-      description: "Send and receive money from one part to make payment faster"
+      description:
+        "Send and receive money from one part to make payment faster",
     },
     {
       icon: <Repeat className="w-6 h-6 text-accent" />,
+      image: bulkPayments,
       title: "Make bulk payments",
-      description: "Our organisation can also send and receive money at the same transaction at the same time."
+      description:
+        "Our organisation can also send and receive money at the same transaction at the same time.",
     },
     {
       icon: <Clock className="w-6 h-6 text-accent" />,
+      image: processSalaries,
       title: "Expense tracking",
-      description: "Get access to in-depth analytics report and monitoring analytics reporting for your business."
-    }
+      description:
+        "Get access to in-depth analytics report and monitoring analytics reporting for your business.",
+    },
   ];
 
   return (
@@ -51,9 +60,7 @@ const BusinessSection = () => {
                   className="p-6 bg-transparent border-none hover:shadow-glow-primary/20 transition-all duration-300"
                 >
                   <div className="flex items-start space-x-4">
-                    <div className="p-2 bg-accent/10 rounded-lg flex-shrink-0">
-                      {feature.icon}
-                    </div>
+                    <img src={feature.image} alt={feature.title} />
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">
                         {feature.title}
