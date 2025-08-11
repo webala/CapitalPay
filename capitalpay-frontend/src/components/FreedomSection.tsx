@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { Smartphone, Wallet } from "lucide-react";
 import iPhone from "@/assets/iphone.png";
 import linkBank from "@/assets/linkBank.png";
 import moneyTransfer from "@/assets/moneyTransfer.png";

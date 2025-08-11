@@ -112,7 +112,7 @@ const ContactUs = () => {
                   <Textarea
                     className="bg-blue-800/30 border-blue-600/50 rounded-2xl text-white placeholder:text-white/60 focus:border-blue-400 min-h-[120px] resize-none"
                     placeholder="Your Message"
-                  />
+                  />w
                 </div>
 
                 {/* Submit Button */}

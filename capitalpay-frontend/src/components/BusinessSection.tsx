@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Shield, Clock, CreditCard, Repeat } from "lucide-react";
+import { Clock, CreditCard, Repeat } from "lucide-react";
 import phones from "@/assets/phones.png";
 import receivePayments from "@/assets/receivePayments.png";
 import bulkPayments from "@/assets/bulkPayments.png";
