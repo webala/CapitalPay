@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import iPhone from "@/assets/iphone.png";
+import iPhone from "@/assets/iPhone.png";
 import linkBank from "@/assets/linkBank.png";
 import moneyTransfer from "@/assets/moneyTransfer.png";
 import wallet from "@/assets/wallet.png";
