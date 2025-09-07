@@ -1,43 +1,64 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useFeaturedBlog, useBlogs, formatBlogDate } from "@/hooks/useBlog";
 import { BLOG_CATEGORIES } from "@/types/blog";
 
+// Static blog data
+const staticBlogData = {
+  _id: "static-blog-1",
+  title: "The Basics of Capital Pay",
+  slug: "basics-of-capital-pay",
+  excerpt:
+    "Learn everything you need to know about Capital Pay's innovative payment solutions and how they can transform your business.",
+  category: "FINANCE",
+  tags: ["payments", "fintech", "business", "digital payments", "security"],
+  author: {
+    name: "Sarah Johnson",
+    email: "sarah@capitalpay.com",
+  },
+  status: "published",
+  featured: true,
+  views: 1500,
+  readTime: 8,
+  createdAt: "2024-01-15T08:00:00.000Z",
+};
+
+// Helper function to format date
+const formatBlogDate = (dateString: string): string => {
+  return new Date(dateString)
+    .toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    .toUpperCase();
+};
+
 const Blog = () => {
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [email, setEmail] = useState("");
 
-  // Create filters object for the useBlogs hook
-  const filters = useMemo(
-    () => ({
-      page: currentPage,
-      limit: 6,
-      ...(selectedCategory !== "all" && { category: selectedCategory }),
-      ...(searchQuery && { search: searchQuery }),
-    }),
-    [currentPage, selectedCategory, searchQuery]
-  );
-
-  // Use custom hooks
-  const { blog: featuredPost } = useFeaturedBlog();
-  const { blogs: blogPosts, loading, totalPages } = useBlogs(filters);
+  // Static data - only show the blog if it matches the selected category
+  const featuredPost = staticBlogData;
+  const blogPosts =
+    selectedCategory === "all" || selectedCategory === staticBlogData.category
+      ? [staticBlogData]
+      : [];
+  const loading = false;
+  const totalPages = 1;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    setCurrentPage(1);
     setSearchQuery(searchTerm);
   };
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setCurrentPage(1);
   };
 
   const handleSubscribe = async (e: React.FormEvent) => {
@@ -393,68 +414,10 @@ const Blog = () => {
             )}
           </div>
 
-          {/* Pagination */}
+          {/* Pagination - Hidden since we only have one blog post */}
           {totalPages > 1 && (
             <div className="flex justify-center items-center space-x-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className="text-white/60 hover:text-white disabled:opacity-50"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                </svg>
-              </Button>
-
-              <div className="flex space-x-1">
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  const pageNum = i + 1;
-                  return (
-                    <Button
-                      key={pageNum}
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setCurrentPage(pageNum)}
-                      className={
-                        currentPage === pageNum
-                          ? "w-8 h-8 bg-white/10 text-white"
-                          : "w-8 h-8 text-white/60 hover:text-white hover:bg-white/10"
-                      }
-                    >
-                      {pageNum}
-                    </Button>
-                  );
-                })}
-                {totalPages > 5 && (
-                  <span className="flex items-center text-white/60 px-2">
-                    ...
-                  </span>
-                )}
-              </div>
-
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() =>
-                  setCurrentPage(Math.min(totalPages, currentPage + 1))
-                }
-                disabled={currentPage === totalPages}
-                className="text-white/60 hover:text-white disabled:opacity-50"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-                </svg>
-              </Button>
+              <span className="text-white/60 text-sm">Page 1 of 1</span>
             </div>
           )}
         </div>

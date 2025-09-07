@@ -1,10 +1,42 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useFeaturedBlogs, formatBlogDate } from "@/hooks/useBlog";
 import laptop from "@/assets/laptop.png";
 
+// Static blog data
+const staticBlogData = {
+  _id: "static-blog-1",
+  title: "The Basics of Capital Pay",
+  slug: "basics-of-capital-pay",
+  excerpt:
+    "Learn everything you need to know about Capital Pay's innovative payment solutions and how they can transform your business.",
+  category: "FINANCE",
+  tags: ["payments", "fintech", "business", "digital payments", "security"],
+  author: {
+    name: "Sarah Johnson",
+    email: "sarah@capitalpay.com",
+  },
+  status: "published",
+  featured: true,
+  views: 1500,
+  readTime: 8,
+  createdAt: "2024-01-15T08:00:00.000Z",
+};
+
+// Helper function to format date
+const formatBlogDate = (dateString: string): string => {
+  return new Date(dateString)
+    .toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    .toUpperCase();
+};
+
 const InsightsSection = () => {
-  const { blogs: blogPosts, loading } = useFeaturedBlogs(3);
+  // Use static data instead of API call
+  const blogPosts = [staticBlogData];
+  const loading = false;
   return (
     <section className="relative py-20 bg-gradient-to-b from-[#0A0A23] to-[#1A1A3A] overflow-hidden">
       {/* Background Effects */}

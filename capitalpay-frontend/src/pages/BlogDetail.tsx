@@ -1,81 +1,41 @@
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { useBlogPost, useRelatedBlogs, formatBlogDate } from "@/hooks/useBlog";
 import { ArrowLeft, Clock, Eye, Share2 } from "lucide-react";
 
+// Static blog data
+const staticBlogData = {
+  _id: "static-blog-1",
+  title: "The Basics of Capital Pay",
+  slug: "basics-of-capital-pay",
+  excerpt:
+    "Learn everything you need to know about Capital Pay's innovative payment solutions and how they can transform your business.",
+  category: "FINANCE",
+  tags: ["payments", "fintech", "business", "digital payments", "security"],
+  author: {
+    name: "Sarah Johnson",
+    email: "sarah@capitalpay.com",
+  },
+  status: "published",
+  featured: true,
+  views: 1500,
+  readTime: 8,
+  createdAt: "2024-01-15T08:00:00.000Z",
+};
+
+// Helper function to format date
+const formatBlogDate = (dateString: string): string => {
+  return new Date(dateString)
+    .toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    .toUpperCase();
+};
+
 const BlogDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const { blog, loading, error } = useBlogPost(slug || "");
-  const { blogs: relatedBlogs, loading: relatedLoading } = useRelatedBlogs(
-    blog?._id || "",
-    blog?.category || "",
-    3
-  );
-
-  if (loading) {
-    return (
-      <div className="min-h-screen">
-        <Header />
-        <div className="py-20 px-8">
-          <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="flex items-center space-x-3 mb-8">
-              <div className="w-12 h-12 bg-gray-400 rounded-full"></div>
-              <div className="space-y-2">
-                <div className="h-4 bg-gray-400 rounded w-24"></div>
-                <div className="h-3 bg-gray-400 rounded w-20"></div>
-              </div>
-            </div>
-            <div className="h-8 bg-gray-400 rounded w-3/4 mb-6"></div>
-            <div className="space-y-3 mb-12">
-              <div className="h-4 bg-gray-400 rounded w-full"></div>
-              <div className="h-4 bg-gray-400 rounded w-5/6"></div>
-              <div className="h-4 bg-gray-400 rounded w-4/5"></div>
-            </div>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (error || !blog) {
-    return (
-      <div className="min-h-screen">
-        <Header />
-        <div className="py-20 px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-8">
-              <Link to="/blog">
-                <Button
-                  variant="outline"
-                  className="border-white/20 text-white hover:bg-white/10"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Blog
-                </Button>
-              </Link>
-            </div>
-            <h1 className="text-4xl font-bold text-white mb-4">
-              {error === "Blog post not found" ? "Post Not Found" : "Error"}
-            </h1>
-            <p className="text-white/60 mb-8">
-              {error === "Blog post not found"
-                ? "The blog post you're looking for doesn't exist or has been removed."
-                : "Something went wrong while loading the blog post."}
-            </p>
-            <Link to="/blog">
-              <Button className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600">
-                View All Posts
-              </Button>
-            </Link>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
   return (
     <div className="min-h-screen">
       <Header />
@@ -99,9 +59,9 @@ const BlogDetail = () => {
           {/* Category Badge */}
           <div className="mb-6">
             <span className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-              {blog.category}
+              {staticBlogData.category}
             </span>
-            {blog.featured && (
+            {staticBlogData.featured && (
               <span className="ml-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
                 FEATURED
               </span>
@@ -110,7 +70,7 @@ const BlogDetail = () => {
 
           {/* Blog Title */}
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            {blog.title}
+            {staticBlogData.title}
           </h1>
 
           {/* Blog Meta Info */}
@@ -118,7 +78,7 @@ const BlogDetail = () => {
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
                 <span className="text-white text-sm font-bold">
-                  {blog.author.name
+                  {staticBlogData.author.name
                     .split(" ")
                     .map((n) => n[0])
                     .join("")}
@@ -126,28 +86,28 @@ const BlogDetail = () => {
               </div>
               <div>
                 <p className="text-white text-sm font-semibold">
-                  {blog.author.name}
+                  {staticBlogData.author.name}
                 </p>
                 <p className="text-white/60 text-sm">
-                  {formatBlogDate(blog.createdAt)}
+                  {formatBlogDate(staticBlogData.createdAt)}
                 </p>
               </div>
             </div>
             <div className="flex items-center space-x-4 text-sm">
               <div className="flex items-center space-x-1">
                 <Clock className="w-4 h-4" />
-                <span>{blog.readTime} min read</span>
+                <span>{staticBlogData.readTime} min read</span>
               </div>
               <div className="flex items-center space-x-1">
                 <Eye className="w-4 h-4" />
-                <span>{blog.views.toLocaleString()} views</span>
+                <span>{staticBlogData.views.toLocaleString()} views</span>
               </div>
             </div>
           </div>
 
           {/* Blog Excerpt */}
           <p className="text-white/80 text-lg leading-relaxed mb-8 max-w-3xl">
-            {blog.excerpt}
+            {staticBlogData.excerpt}
           </p>
 
           {/* Share Button */}
@@ -158,8 +118,8 @@ const BlogDetail = () => {
               onClick={() => {
                 if (navigator.share) {
                   navigator.share({
-                    title: blog.title,
-                    text: blog.excerpt,
+                    title: staticBlogData.title,
+                    text: staticBlogData.excerpt,
                     url: window.location.href,
                   });
                 } else {
@@ -221,29 +181,153 @@ const BlogDetail = () => {
       <section className="px-8 pb-20">
         <div className="max-w-3xl mx-auto">
           {/* Main Blog Content */}
-          <div className="mb-16">
-            <div
-              className="prose prose-lg prose-invert max-w-none text-white/80 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: blog.content }}
-            />
+          <div className="mb-16 prose prose-lg prose-invert max-w-none">
+            <div className="text-white/80 leading-relaxed space-y-6">
+              <p className="text-lg">
+                Capital Pay is revolutionizing the way businesses handle
+                payments in the digital age. Our comprehensive platform combines
+                cutting-edge technology with user-friendly interfaces to create
+                a seamless payment experience for both businesses and their
+                customers.
+              </p>
+
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">
+                Understanding Capital Pay's Core Features
+              </h2>
+
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    1. Instant Payments
+                  </h3>
+                  <p>
+                    Our platform enables real-time payment processing, allowing
+                    businesses to receive funds instantly. This feature
+                    eliminates the traditional waiting periods associated with
+                    bank transfers and helps improve cash flow management.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    2. Security First Approach
+                  </h3>
+                  <p className="mb-3">
+                    We implement military-grade encryption and multiple layers
+                    of security protocols to ensure that every transaction is
+                    protected. Our system includes:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-white/70">
+                    <li>End-to-end encryption</li>
+                    <li>Two-factor authentication</li>
+                    <li>Real-time fraud detection</li>
+                    <li>Secure data storage</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    3. Multiple Payment Options
+                  </h3>
+                  <p className="mb-3">
+                    Capital Pay supports various payment methods including:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-white/70">
+                    <li>Credit and debit cards</li>
+                    <li>Bank transfers</li>
+                    <li>Digital wallets</li>
+                    <li>QR code payments</li>
+                    <li>Contactless payments</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    4. Business Analytics
+                  </h3>
+                  <p className="mb-3">
+                    Our platform provides detailed insights into your payment
+                    data:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-white/70">
+                    <li>Transaction history</li>
+                    <li>Revenue analytics</li>
+                    <li>Customer payment patterns</li>
+                    <li>Peak business hours</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    5. Integration Capabilities
+                  </h3>
+                  <p className="mb-3">
+                    Capital Pay seamlessly integrates with popular business
+                    tools and platforms:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-white/70">
+                    <li>E-commerce platforms</li>
+                    <li>Accounting software</li>
+                    <li>CRM systems</li>
+                    <li>POS systems</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">
+                Getting Started with Capital Pay
+              </h2>
+              <p className="mb-4">
+                Setting up your Capital Pay account is simple and
+                straightforward. Our onboarding process involves:
+              </p>
+              <ol className="list-decimal list-inside space-y-2 text-white/70">
+                <li>Creating your business profile</li>
+                <li>Verifying your identity</li>
+                <li>Connecting your bank account</li>
+                <li>Customizing your payment settings</li>
+                <li>Installing necessary integrations</li>
+              </ol>
+
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">
+                The Future of Payments
+              </h2>
+              <p className="mb-4">
+                As we continue to evolve, Capital Pay remains committed to
+                innovation and excellence in the payment processing industry.
+                Our roadmap includes expanding our services to include:
+              </p>
+              <ul className="list-disc list-inside space-y-1 text-white/70 mb-6">
+                <li>Advanced AI-powered fraud prevention</li>
+                <li>Enhanced cross-border payment capabilities</li>
+                <li>Expanded cryptocurrency support</li>
+                <li>Advanced loyalty program integration</li>
+              </ul>
+
+              <div className="bg-gradient-to-r from-pink-500/10 to-red-500/10 border border-pink-500/20 rounded-lg p-6 mt-8">
+                <p className="text-lg font-medium text-white">
+                  Join thousands of businesses already benefiting from Capital
+                  Pay's modern payment solutions and take your first step toward
+                  payment processing excellence.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Tags Section */}
-          {blog.tags && blog.tags.length > 0 && (
-            <div className="mb-12">
-              <h3 className="text-lg font-semibold text-white mb-4">Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {blog.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-white/10 text-white/80 px-3 py-1 rounded-full text-sm hover:bg-white/20 transition-colors"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
+          <div className="mb-12">
+            <h3 className="text-lg font-semibold text-white mb-4">Tags</h3>
+            <div className="flex flex-wrap gap-2">
+              {staticBlogData.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="bg-white/10 text-white/80 px-3 py-1 rounded-full text-sm hover:bg-white/20 transition-colors cursor-pointer"
+                >
+                  #{tag}
+                </span>
+              ))}
             </div>
-          )}
+          </div>
 
           {/* Share Section */}
           <div className="mb-16 p-6 bg-blue-800/20 backdrop-blur-sm rounded-2xl">
@@ -259,8 +343,8 @@ const BlogDetail = () => {
                 onClick={() => {
                   if (navigator.share) {
                     navigator.share({
-                      title: blog.title,
-                      text: blog.excerpt,
+                      title: staticBlogData.title,
+                      text: staticBlogData.excerpt,
                       url: window.location.href,
                     });
                   } else {
@@ -277,102 +361,6 @@ const BlogDetail = () => {
       </section>
 
       {/* Related Posts Section */}
-      {relatedBlogs.length > 0 && (
-        <section className="px-8 pb-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">
-              Related Articles
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {relatedLoading
-                ? // Loading skeleton for related posts
-                  [...Array(3)].map((_, index) => (
-                    <div
-                      key={index}
-                      className="bg-blue-800/30 backdrop-blur-sm rounded-2xl overflow-hidden animate-pulse"
-                    >
-                      <div className="h-48 bg-gradient-to-br from-gray-400 to-gray-600"></div>
-                      <div className="p-6 space-y-3">
-                        <div className="h-4 bg-gray-400 rounded w-20"></div>
-                        <div className="h-5 bg-gray-400 rounded w-3/4"></div>
-                        <div className="h-3 bg-gray-400 rounded w-full"></div>
-                      </div>
-                    </div>
-                  ))
-                : relatedBlogs.map((relatedBlog) => (
-                    <Link
-                      key={relatedBlog._id}
-                      to={`/blog/${relatedBlog.slug}`}
-                      className="bg-blue-800/30 backdrop-blur-sm rounded-2xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 block"
-                    >
-                      {/* Post Image */}
-                      <div className="relative h-48 bg-gradient-to-br from-orange-400 via-red-500 to-pink-600">
-                        <div className="absolute inset-0 bg-black/20 rounded-t-2xl">
-                          <div className="flex items-center justify-center h-full">
-                            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                              <svg
-                                className="w-8 h-8 text-white"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                                />
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Post Content */}
-                      <div className="p-6">
-                        <div className="mb-3">
-                          <span className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                            {relatedBlog.category}
-                          </span>
-                        </div>
-                        <h3 className="text-lg font-bold text-white mb-3 line-clamp-2">
-                          {relatedBlog.title}
-                        </h3>
-                        <p className="text-white/80 text-sm leading-relaxed mb-4 line-clamp-3">
-                          {relatedBlog.excerpt}
-                        </p>
-
-                        {/* Author Info */}
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                              <span className="text-white text-xs font-bold">
-                                {relatedBlog.author.name
-                                  .split(" ")
-                                  .map((n) => n[0])
-                                  .join("")}
-                              </span>
-                            </div>
-                            <div>
-                              <p className="text-white text-xs font-semibold">
-                                {relatedBlog.author.name}
-                              </p>
-                              <p className="text-white/60 text-xs">
-                                {formatBlogDate(relatedBlog.createdAt)}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="text-white/60 text-xs">
-                            {relatedBlog.readTime} min read
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       <Footer />
     </div>
