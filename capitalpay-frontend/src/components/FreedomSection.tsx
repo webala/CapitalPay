@@ -9,56 +9,76 @@ const FreedomSection = () => {
   return (
     <section className="relative py-20 bg-gradient-to-b from-background to-secondary/20">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-primary/5" />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-accent/10 to-transparent rounded-full blur-3xl" />
+      <div className="absolute inset-0">
+        {/* Second radial gradient (pink/purple tones) - Top Right */}
+        <div
+          className="absolute top-0 right-1/4 w-[900px] h-[700px] blur-3xl opacity-70"
+          style={{
+            background: `radial-gradient(circle, #EF07C9 0%, #C54DF3 40%, #A186EB 70%, transparent 100%)`,
+          }}
+        />
+        {/* Additional gradient orbs for more depth */}
+        <div
+          className="absolute top-1/3 left-1/4 w-[400px] h-[400px] blur-2xl opacity-30"
+          style={{
+            background: `radial-gradient(circle, #3B82F6 0%, transparent 70%)`,
+          }}
+        />
+      </div>
 
       <div className="relative container mx-auto px-4 max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6">
-            Your phone, your money, your freedom.
+          <h2 className="text-3xl capitalize lg:text-4xl font-bold text-foreground mb-6">
+            Empowering businesses of all sizes
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Fast and seamless from anywhere, anytime.
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            CapitalPay mobile money services make it easy and safe <br />
+            for you to transact from anywhere, anytime.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-3 items-center">
+        <div className="grid md:grid-cols-3 gap-3 md:gap-12 items-start max-w-4xl mx-auto">
           {/* Left - Features */}
 
-          <Card className="px-4 bg-[#002C62] py-16 border-border/50 hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-3xl">
+          <Card className="px-4 bg-[#002C62] max-h-[300px] border-none py-8 hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-3xl">
             <div className="flex flex-col items-start space-y-4">
               <img src={moneyTransfer} alt="money-transfer" />
               <div>
                 <h3 className="text-lg font-bold text-foreground mb-2">
-                  MOBILE MONEY TRANSFERS
+                  BULK AND PAYROLL PAYMENTS
                 </h3>
                 <p className="text-muted-foreground">
-                  Send and receive money from one part of your country to
-                  another, or across borders with ease
+                  Secure, real-time mass disbursements that reduce costs for
+                  corporates and institutions.
                 </p>
               </div>
             </div>
           </Card>
-          <Card className="px-4 bg-gradient-to-br from-[#892887] via-[#E94258] to-[#F27224] h-full w-full pt-10 border-border/50 lg:row-span-2 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
-            <div className="flex flex-col items-start space-y-4">
-              <div>
-                <h3 className="text-lg font-bold text-foreground mb-2">
-                  PAY BILLS
+          <Card className="px-4 bg-gradient-to-br h-full border-none overflow-hidden max-h-[350px] from-[#892887] via-[#E94258] to-[#F27224] h-full w-full border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+            <div className="flex flex-col items-start overflow-y-hidden gap-3">
+              <div className="h-1/3">
+                <h3 className="text-lg font-bold text-foreground">
+                  CAPITAL PAY WALLET
                 </h3>
                 <p className="text-muted-foreground">
-                  Send and receive money from one part of your country to
-                  another, or across borders with ease
+                  Transform any smartphone into a contactless payment terminal
+                  supporting Visa/Mastercard, Apple Pay, Google Pay, and Samsung
+                  Pay.
                 </p>
               </div>
-              <img src={iPhone} alt="iPhone" className="w-full" />
+              <img
+                src={iPhone}
+                alt="iPhone"
+                className="w-full overflow-hidden h-2/3"
+              />
             </div>
           </Card>
-          <Card className="px-4 bg-[#002C62] py-16 border-border/50 hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-2xl">
+          <Card className="px-4 bg-[#002C62] max-h-[300px]  py-8 border-none hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-2xl">
             <div className="flex flex-col items-start space-y-4">
               <img src={wallet} alt="wallet" />
               <div>
-                <h3 className="text-lg font-bold text-foreground mb-2">
+                <h3 className="text-lg font-bold text-foreground">
                   ENJOY MULTI-CURRENCY WALLETS
                 </h3>
                 <p className="text-muted-foreground">
@@ -69,11 +89,11 @@ const FreedomSection = () => {
             </div>
           </Card>
 
-          <Card className="px-4 bg-[#002C62] h-full w-full py-16 border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+          <Card className="px-4 bg-[#002C62] max-h-[300px] h-full w-full py-8 border-none hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
             <div className="flex flex-col items-start space-y-4">
               <img src={airtime} alt="airtime" />
               <div>
-                <h3 className="text-lg font-bold text-foreground mb-2">
+                <h3 className="text-lg font-bold text-foreground">
                   AIRTIME TOP-UP
                 </h3>
                 <p className="text-muted-foreground">
@@ -83,11 +103,25 @@ const FreedomSection = () => {
               </div>
             </div>
           </Card>
-          <Card className="px-4 bg-[#002C62] py-16 h-full w-full border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+          <Card className="px-4 bg-[#002C62] max-h-[250px] h-full w-full py-8 border-none hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+            <div className="flex flex-col items-start space-y-4">
+              <img src={airtime} alt="airtime" />
+              <div>
+                <h3 className="text-lg font-bold text-foreground">
+                  CUSTOM INTEGRATIONS
+                </h3>
+                <p className="text-muted-foreground">
+                  Enterprise-grade solutions adaptable to e-commerce, fintech,
+                  and public infrastructure systems.
+                </p>
+              </div>
+            </div>
+          </Card>
+          <Card className="px-4 bg-[#002C62] max-h-[300px] h-full py-8 w-full border-none hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
             <div className="flex flex-col items-start space-y-4">
               <img src={linkBank} alt="link-bank" />
               <div>
-                <h3 className="text-lg font-bold text-foreground mb-2">
+                <h3 className="text-lg font-bold text-foreground">
                   LINK YOUR BANK ACCOUNTS
                 </h3>
                 <p className="text-muted-foreground">

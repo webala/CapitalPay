@@ -1,71 +1,51 @@
+import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useFeaturedBlog, useBlogs, formatBlogDate } from "@/hooks/useBlog";
+import { BLOG_CATEGORIES } from "@/types/blog";
 
 const Blog = () => {
-  const blogPosts = [
-    {
-      id: 1,
-      category: "FINANCE",
-      title: "The Basics about Saving Money",
-      excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
-      author: "ALEX TURNER",
-      date: "AUGUST 2, 2023",
-      image: "/api/placeholder/300/200",
-    },
-    {
-      id: 2,
-      category: "FINANCE",
-      title: "The Basics about Saving Money",
-      excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
-      author: "ALEX TURNER",
-      date: "AUGUST 2, 2023",
-      image: "/api/placeholder/300/200",
-    },
-    {
-      id: 3,
-      category: "FINANCE",
-      title: "The Basics about Saving Money",
-      excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
-      author: "ALEX TURNER",
-      date: "AUGUST 2, 2023",
-      image: "/api/placeholder/300/200",
-    },
-    {
-      id: 4,
-      category: "FINANCE",
-      title: "The Basics about Saving Money",
-      excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
-      author: "ALEX TURNER",
-      date: "AUGUST 2, 2023",
-      image: "/api/placeholder/300/200",
-    },
-    {
-      id: 5,
-      category: "FINANCE",
-      title: "The Basics about Saving Money",
-      excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
-      author: "ALEX TURNER",
-      date: "AUGUST 2, 2023",
-      image: "/api/placeholder/300/200",
-    },
-    {
-      id: 6,
-      category: "FINANCE",
-      title: "The Basics about Saving Money",
-      excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
-      author: "ALEX TURNER",
-      date: "AUGUST 2, 2023",
-      image: "/api/placeholder/300/200",
-    },
-  ];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [email, setEmail] = useState("");
+
+  // Create filters object for the useBlogs hook
+  const filters = useMemo(
+    () => ({
+      page: currentPage,
+      limit: 6,
+      ...(selectedCategory !== "all" && { category: selectedCategory }),
+      ...(searchQuery && { search: searchQuery }),
+    }),
+    [currentPage, selectedCategory, searchQuery]
+  );
+
+  // Use custom hooks
+  const { blog: featuredPost } = useFeaturedBlog();
+  const { blogs: blogPosts, loading, totalPages } = useBlogs(filters);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setCurrentPage(1);
+    setSearchQuery(searchTerm);
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: Implement newsletter subscription
+    console.log("Subscribe email:", email);
+    setEmail("");
+  };
 
   return (
     <div className="min-h-screen relative">
@@ -117,28 +97,71 @@ const Blog = () => {
                 Blog
               </h1>
               <p className="text-white/80 text-lg leading-relaxed mb-8">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat
-                nulla suspendisse tortor aenean dis placerat.
+                Stay informed with the latest news, trends, and insights from
+                the evolving landscape of payments, technology, and global
+                commerce.
               </p>
+
+              {/* Search Form */}
+              <form onSubmit={handleSearch} className="flex space-x-3 mb-8">
+                <Input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Search articles..."
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60 flex-1"
+                />
+                <Button
+                  type="submit"
+                  className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600"
+                >
+                  Search
+                </Button>
+              </form>
             </div>
 
             <div className="flex flex-col-reverse md:flex-row gap-0">
               {/* Featured Post */}
-              <div className="bg-blue-800/50 backdrop-blur-sm rounded-2xl p-6 w-full md:w-1/2">
-                <div className="mb-4">
-                  <span className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    FEATURED
-                  </span>
+              {featuredPost ? (
+                <Link
+                  to={`/blog/${featuredPost.slug}`}
+                  className="bg-blue-800/50 backdrop-blur-sm rounded-2xl p-6 w-full md:w-1/2 hover:bg-blue-800/60 transition-colors"
+                >
+                  <div className="mb-4">
+                    <span className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      FEATURED
+                    </span>
+                    <span className="ml-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      {featuredPost.category}
+                    </span>
+                  </div>
+                  <h2 className="text-xl font-bold text-white mb-3 line-clamp-2">
+                    {featuredPost.title}
+                  </h2>
+                  <p className="text-white/80 text-sm leading-relaxed line-clamp-3 mb-4">
+                    {featuredPost.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between text-white/60 text-xs">
+                    <div className="flex items-center space-x-3">
+                      <span>{featuredPost.author.name}</span>
+                      <span>•</span>
+                      <span>{formatBlogDate(featuredPost.createdAt)}</span>
+                    </div>
+                    <span>{featuredPost.readTime} min read</span>
+                  </div>
+                </Link>
+              ) : (
+                <div className="bg-blue-800/50 backdrop-blur-sm rounded-2xl p-6 w-full md:w-1/2 animate-pulse">
+                  <div className="mb-4">
+                    <div className="h-6 bg-gray-400 rounded w-20"></div>
+                  </div>
+                  <div className="h-6 bg-gray-400 rounded w-3/4 mb-3"></div>
+                  <div className="space-y-2">
+                    <div className="h-3 bg-gray-400 rounded w-full"></div>
+                    <div className="h-3 bg-gray-400 rounded w-2/3"></div>
+                  </div>
                 </div>
-                <h2 className="text-xl font-bold text-white mb-3">
-                  Money Transfer Explained With Pros and Cons for Investment
-                </h2>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse varius enim in eros elementum tristique. Duis
-                  cursus, mi quis viverra ornare.
-                </p>
-              </div>
+              )}
 
               {/* Right Content - Featured Image */}
               <div className="flex justify-center  w-full md:w-1/2">
@@ -190,16 +213,25 @@ const Blog = () => {
               </div>
 
               {/* Right Content - Form */}
-              <div className="flex space-x-3 w-full md:w-auto">
+              <form
+                onSubmit={handleSubscribe}
+                className="flex space-x-3 w-full md:w-auto"
+              >
                 <Input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   className="bg-white/10 border-white/20 text-white placeholder:text-white/60 min-w-[250px]"
+                  required
                 />
-                <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/20">
+                <Button
+                  type="submit"
+                  className="bg-white/20 hover:bg-white/30 text-white border border-white/20"
+                >
                   SUBSCRIBE
                 </Button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -214,145 +246,217 @@ const Blog = () => {
             </h2>
 
             {/* Filter Tabs */}
-            <div className="flex space-x-2">
-              <Button
-                variant="secondary"
-                size="sm"
-                className="bg-gradient-to-r from-pink-500 to-red-500 text-white"
-              >
-                All
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-white border-white/20 hover:bg-white/10"
-              >
-                Apps
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-white border-white/20 hover:bg-white/10"
-              >
-                Products
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-white border-white/20 hover:bg-white/10"
-              >
-                Tutorial
-              </Button>
+            <div className="flex flex-wrap gap-2">
+              {BLOG_CATEGORIES.map((category) => (
+                <Button
+                  key={category.value}
+                  variant={
+                    selectedCategory === category.value
+                      ? "secondary"
+                      : "outline"
+                  }
+                  size="sm"
+                  onClick={() => handleCategoryChange(category.value)}
+                  className={
+                    selectedCategory === category.value
+                      ? "bg-gradient-to-r from-pink-500 to-red-500 text-white"
+                      : "text-white border-white/20 hover:bg-white/10"
+                  }
+                >
+                  {category.label}
+                </Button>
+              ))}
             </div>
           </div>
 
           {/* Posts Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {blogPosts.map((post) => (
-              <div
-                key={post.id}
-                className="bg-blue-800/30 backdrop-blur-sm rounded-2xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300"
-              >
-                {/* Post Image */}
-                <div className="relative h-48 bg-gradient-to-br from-orange-400 via-red-500 to-pink-600">
-                  <div className="absolute inset-0 bg-black/20 rounded-t-2xl">
-                    <div className="flex items-center justify-center h-full">
-                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                        <svg
-                          className="w-8 h-8 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                        </svg>
+            {loading ? (
+              // Loading skeleton
+              [...Array(6)].map((_, index) => (
+                <div
+                  key={index}
+                  className="bg-blue-800/30 backdrop-blur-sm rounded-2xl overflow-hidden animate-pulse"
+                >
+                  <div className="h-48 bg-gradient-to-br from-gray-400 to-gray-600"></div>
+                  <div className="p-6 space-y-3">
+                    <div className="h-4 bg-gray-400 rounded w-20"></div>
+                    <div className="h-5 bg-gray-400 rounded w-3/4"></div>
+                    <div className="h-3 bg-gray-400 rounded w-full"></div>
+                    <div className="h-3 bg-gray-400 rounded w-2/3"></div>
+                    <div className="flex items-center space-x-3 mt-4">
+                      <div className="w-8 h-8 bg-gray-400 rounded-full"></div>
+                      <div className="space-y-1">
+                        <div className="h-3 bg-gray-400 rounded w-16"></div>
+                        <div className="h-2 bg-gray-400 rounded w-12"></div>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                {/* Post Content */}
-                <div className="p-6">
-                  <div className="mb-3">
-                    <span className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      {post.category}
-                    </span>
+              ))
+            ) : blogPosts.length > 0 ? (
+              blogPosts.map((post) => (
+                <Link
+                  key={post._id}
+                  to={`/blog/${post.slug}`}
+                  className="bg-blue-800/30 backdrop-blur-sm rounded-2xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 block"
+                >
+                  {/* Post Image */}
+                  <div className="relative h-48 bg-gradient-to-br from-orange-400 via-red-500 to-pink-600">
+                    <div className="absolute inset-0 bg-black/20 rounded-t-2xl">
+                      <div className="flex items-center justify-center h-full">
+                        <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                          <svg
+                            className="w-8 h-8 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-3">
-                    {post.title}
-                  </h3>
-                  <p className="text-white/80 text-sm leading-relaxed mb-4">
-                    {post.excerpt}
-                  </p>
 
-                  {/* Author Info */}
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">
-                        {post.author
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
+                  {/* Post Content */}
+                  <div className="p-6">
+                    <div className="mb-3">
+                      <span className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        {post.category}
                       </span>
                     </div>
-                    <div>
-                      <p className="text-white text-xs font-semibold">
-                        {post.author}
-                      </p>
-                      <p className="text-white/60 text-xs">{post.date}</p>
+                    <h3 className="text-lg font-bold text-white mb-3 line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-white/80 text-sm leading-relaxed mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Author Info */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">
+                            {post.author.name
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")}
+                          </span>
+                        </div>
+                        <div>
+                          <p className="text-white text-xs font-semibold">
+                            {post.author.name}
+                          </p>
+                          <p className="text-white/60 text-xs">
+                            {formatBlogDate(post.createdAt)}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="text-white/60 text-xs">
+                        {post.readTime} min read
+                      </div>
                     </div>
                   </div>
+                </Link>
+              ))
+            ) : (
+              // No posts found
+              <div className="col-span-full text-center py-12">
+                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    className="w-8 h-8 text-white/60"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                    />
+                  </svg>
                 </div>
+                <p className="text-white/60 mb-2">No blog posts found.</p>
+                {(searchTerm || selectedCategory !== "all") && (
+                  <p className="text-white/40 text-sm">
+                    Try adjusting your search terms or category filter.
+                  </p>
+                )}
               </div>
-            ))}
+            )}
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-white/60 hover:text-white"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-              </svg>
-            </Button>
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center space-x-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className="text-white/60 hover:text-white disabled:opacity-50"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+              </Button>
 
-            <div className="flex space-x-1">
+              <div className="flex space-x-1">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  const pageNum = i + 1;
+                  return (
+                    <Button
+                      key={pageNum}
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setCurrentPage(pageNum)}
+                      className={
+                        currentPage === pageNum
+                          ? "w-8 h-8 bg-white/10 text-white"
+                          : "w-8 h-8 text-white/60 hover:text-white hover:bg-white/10"
+                      }
+                    >
+                      {pageNum}
+                    </Button>
+                  );
+                })}
+                {totalPages > 5 && (
+                  <span className="flex items-center text-white/60 px-2">
+                    ...
+                  </span>
+                )}
+              </div>
+
               <Button
                 variant="ghost"
                 size="sm"
-                className="w-8 h-8 bg-white/10 text-white"
+                onClick={() =>
+                  setCurrentPage(Math.min(totalPages, currentPage + 1))
+                }
+                disabled={currentPage === totalPages}
+                className="text-white/60 hover:text-white disabled:opacity-50"
               >
-                1
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                </svg>
               </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="w-8 h-8 text-white/60 hover:text-white hover:bg-white/10"
-              >
-                2
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="w-8 h-8 text-white/60 hover:text-white hover:bg-white/10"
-              >
-                3
-              </Button>
-              <span className="flex items-center text-white/60 px-2">...</span>
             </div>
-
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-white/60 hover:text-white"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-              </svg>
-            </Button>
-          </div>
+          )}
         </div>
       </section>
 

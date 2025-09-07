@@ -6,12 +6,9 @@ const Timeline = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left Content */}
           <div>
-            <h2 className="text-4xl font-bold text-white mb-8">Timeline</h2>
+            <h2 className="text-4xl font-bold text-white mb-8">Our journey</h2>
             <p className="text-white/80 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique. Duis cursus,
-              mi quis viverra ornare, eros dolor interdum nulla, ut commodo diem
-              libero vitae erat.
+              A look at our key milestones and evolution.
             </p>
           </div>
 
@@ -22,15 +19,14 @@ const Timeline = () => {
               <div className="flex-shrink-0 w-4 h-4 bg-white rounded-full mt-1 mr-6"></div>
               <div className="flex-1">
                 <div className="flex items-center mb-2">
-                  <h3 className="text-2xl font-bold text-white mr-4">2014</h3>
+                  <h3 className="text-2xl font-bold text-white mr-4">2019</h3>
                   <span className="text-white/60 text-sm uppercase tracking-wider">
-                    ANNOUNCEMENT
+                    FOUNDATION
                   </span>
                 </div>
                 <p className="text-white/80 leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  mattis vivamus et mattis bibendum congue orci et interdum.
-                  Risus leo et.
+                  Capital Pay was founded to bridge the gap in digital financial
+                  access, starting with a focus on African markets.
                 </p>
                 <div className="mt-4 h-px bg-white/20"></div>
               </div>
@@ -41,15 +37,14 @@ const Timeline = () => {
               <div className="flex-shrink-0 w-4 h-4 bg-white rounded-full mt-1 mr-6"></div>
               <div className="flex-1">
                 <div className="flex items-center mb-2">
-                  <h3 className="text-2xl font-bold text-white mr-4">2016</h3>
+                  <h3 className="text-2xl font-bold text-white mr-4">2021</h3>
                   <span className="text-white/60 text-sm uppercase tracking-wider">
-                    ANNOUNCEMENT
+                    LAUNCH
                   </span>
                 </div>
                 <p className="text-white/80 leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  mattis vivamus et mattis bibendum congue orci et interdum.
-                  Risus leo et.
+                  Launched banking integrations for last-mile merchant
+                  cash-outs, significantly enhancing financial accessibility.
                 </p>
                 <div className="mt-4 h-px bg-white/20"></div>
               </div>
@@ -60,15 +55,15 @@ const Timeline = () => {
               <div className="flex-shrink-0 w-4 h-4 bg-white rounded-full mt-1 mr-6"></div>
               <div className="flex-1">
                 <div className="flex items-center mb-2">
-                  <h3 className="text-2xl font-bold text-white mr-4">2018</h3>
+                  <h3 className="text-2xl font-bold text-white mr-4">2022</h3>
                   <span className="text-white/60 text-sm uppercase tracking-wider">
-                    ANNOUNCEMENT
+                    EXPANSION
                   </span>
                 </div>
                 <p className="text-white/80 leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  mattis vivamus et mattis bibendum congue orci et interdum.
-                  Risus leo et.
+                  Expanded into government services, specializing in customs
+                  integrations to optimize government revenues, with
+                  integrations for over 21 banks into the Capital Pay platform.
                 </p>
                 <div className="mt-4 h-px bg-white/20"></div>
               </div>
@@ -79,15 +74,15 @@ const Timeline = () => {
               <div className="flex-shrink-0 w-4 h-4 bg-white rounded-full mt-1 mr-6"></div>
               <div className="flex-1">
                 <div className="flex items-center mb-2">
-                  <h3 className="text-2xl font-bold text-white mr-4">2022</h3>
+                  <h3 className="text-2xl font-bold text-white mr-4">2025</h3>
                   <span className="text-white/60 text-sm uppercase tracking-wider">
-                    ANNOUNCEMENT
+                    GLOBAL REACH
                   </span>
                 </div>
                 <p className="text-white/80 leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  mattis vivamus et mattis bibendum congue orci et interdum.
-                  Risus leo et.
+                  Extended operations into Asia, Europe, and other markets,
+                  offering payment wallets, A2A transfers, and cross-border
+                  solutions worldwide.
                 </p>
               </div>
             </div>

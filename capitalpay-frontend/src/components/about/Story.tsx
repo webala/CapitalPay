@@ -6,22 +6,24 @@ const Story = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div>
-            <h2 className="text-4xl font-bold text-white mb-8">Our story</h2>
+            <h2 className="text-4xl font-bold text-white mb-8">Our vision</h2>
+
             <div className="space-y-6 text-white/80 leading-relaxed">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque lorem purus justo, ultrices. Sollicitudin odio
-                elementum urna placerat lacus, volutpate. Non malesuada viverra
-                et ultricies orci. Tincidunt tempor, blandit augue ac feugiat.
-                Praesent arcu tempus ullamcorper quisque in. Magna fermentum,
-                lacus fermentum arcu.
+                Our vision is to become the indispensable financial operating
+                system for businesses and individuals worldwide. We achieve this
+                by creating a unified, intuitive, and cost-effective platform
+                that seamlessly integrates point-of-sale payments, domestic
+                financial operations, and global commerce.
               </p>
               <p>
-                Vulputate pellentesque proin facilibus dignissim gravida sed
-                faucibus nunc. Nunc amet pharetra, in vitae porta lacus. Elit in
-                nisl in quis nulla tellus suscipit id. Semper velit odio orci
-                pretium tristique habitant. Elit eu porttitor congue orci
-                turpis.
+                While Capital Pay International is the parent company, we
+                operate through a network of specialized entities and
+                partnerships in each region to cater to specific market demands.
+                This allows us to push different agendas in different
+                markets—from customs and banking solutions in Tanzania to
+                advanced payment aggregation platforms in the UK—all under the
+                trusted Capital Pay International umbrella.
               </p>
             </div>
           </div>

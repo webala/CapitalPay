@@ -10,23 +10,30 @@ const BusinessSection = () => {
     {
       icon: <CreditCard className="w-6 h-6 text-accent" />,
       image: receivePayments,
-      title: "Receive payments",
+      title: "Global reach",
       description:
-        "Send and receive money from one part to make payment faster",
+        "Operate seamlessly across our core markets in Africa, Asia, the UK, and beyond.",
     },
     {
       icon: <Repeat className="w-6 h-6 text-accent" />,
       image: bulkPayments,
-      title: "Make bulk payments",
+      title: "Efficiency",
       description:
-        "Our organisation can also send and receive money at the same transaction at the same time.",
+        "Save time and reduce costs with our streamlined digital processes..",
     },
     {
       icon: <Clock className="w-6 h-6 text-accent" />,
       image: processSalaries,
-      title: "Expense tracking",
+      title: "Security ",
       description:
-        "Get access to in-depth analytics report and monitoring analytics reporting for your business.",
+        " Trusted, encrypted systems to protect your transactions and data.",
+    },
+    {
+      icon: <Clock className="w-6 h-6 text-accent" />,
+      image: bulkPayments,
+      title: "Dedicated Support ",
+      description:
+        " Our business support teams are here to help you grow and succeed..",
     },
   ];
 
@@ -35,7 +42,7 @@ const BusinessSection = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-l from-primary/5 via-transparent to-accent/5" />
 
-      <div className="relative container mx-auto px-4 max-w-7xl">
+      <div className="relative container mx-auto px-8 md:px-0 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Phone Mockup */}
 
@@ -43,13 +50,11 @@ const BusinessSection = () => {
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 leading-tight">
-                Focus on running the business.
-                <br />
-                We'll handle the payments.
+                The CapitalPay Advantage               
               </h2>
-              <p className="text-lg text-muted-foreground max-w-xl">
-                Trusted security with CapitalPay and get robust tools to grow
-                and manage your money.
+              <p className="text-base text-muted-foreground max-w-xl">
+                We provide tools that simplify transactions, improve efficiency,
+                and build trust.
               </p>
             </div>
 
@@ -57,9 +62,9 @@ const BusinessSection = () => {
               {features.map((feature, index) => (
                 <Card
                   key={index}
-                  className="p-6 bg-transparent border-none hover:shadow-glow-primary/20 transition-all duration-300"
+                  className="py-6 bg-transparent border-none hover:shadow-glow-primary/20 transition-all duration-300"
                 >
-                  <div className="flex items-start space-x-4">
+                  <div className="flex items-center space-x-4">
                     <img src={feature.image} alt={feature.title} />
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">
