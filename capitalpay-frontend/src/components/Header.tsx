@@ -1,4 +1,10 @@
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
@@ -11,11 +17,11 @@ const Header = () => {
 
   const navigation = [
     { name: "HOME", href: "/" },
-    { name: "ABOUT US", href: "/about", section: "about" },
+    { name: "ABOUT US", href: "#about", section: "about" },
     { name: "BUSINESS", href: "#business", section: "business" },
     // { name: "PERSONAL", href: "#" },
     { name: "BLOG", href: "#insights", section: "insights" },
-    { name: "CONTACT US", href: "/contact", section: "contact" },
+    { name: "CONTACT US", href: "#contact", section: "contact" },
   ];
 
   // Handle smooth scrolling to sections
@@ -129,9 +135,18 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:block">
-            <Button variant="cta" size="default" className="rounded-3xl">
-              DOWNLOAD APP
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="cta" size="default" className="rounded-3xl">
+                    DOWNLOAD APP
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Coming Soon</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
 
           {/* Mobile Menu Button */}

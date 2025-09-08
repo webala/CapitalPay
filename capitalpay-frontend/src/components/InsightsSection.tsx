@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
 import laptop from "@/assets/laptop.png";
 import { blogPosts } from "@/data/blogs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 
 // Helper function to format date
 const formatBlogDate = (dateString: string): string => {
@@ -19,6 +20,39 @@ const InsightsSection = () => {
   // Use blog posts from blogs.ts, show only featured posts (max 3)
   const featuredPosts = blogPosts;
   const loading = false;
+
+   const faqData = [
+     {
+       id: "item-1",
+       question: "What is CapitalPay?",
+       answer:
+         "CapitalPay is a modern financial technology platform that provides secure money transfer services, digital payments, and financial management tools for both businesses and individuals.",
+     },
+     {
+       id: "item-2",
+       question: "How do I create an account?",
+       answer:
+         "Creating an account is simple - just download our mobile app or visit our website, click 'Sign Up', and follow the verification process. You'll need to provide some basic information and valid ID to get started.",
+     },
+     {
+       id: "item-3",
+       question: "What are the fees for using CapitalPay?",
+       answer:
+         "Our fee structure is transparent and competitive. Basic transfers between CapitalPay accounts are free. International transfers and currency exchanges have small fees that are clearly displayed before you confirm any transaction.",
+     },
+     {
+       id: "item-4",
+       question: "Is CapitalPay secure?",
+       answer:
+         "Yes, security is our top priority. We use bank-level encryption, multi-factor authentication, and regular security audits to protect your data and money. All transactions are monitored 24/7 for suspicious activity.",
+     },
+     {
+       id: "item-5",
+       question: "What countries does CapitalPay operate in?",
+       answer:
+         "CapitalPay currently operates in most major markets across Africa, Europe, and Asia. We're continuously expanding our service area - check our website for the most up-to-date list of supported countries.",
+     },
+   ];
   return (
     <section
       id="insights"
@@ -175,6 +209,44 @@ const InsightsSection = () => {
             </div>
           </div>
         </div>
+
+        {/* FAQ Section */}
+        <section className="py-20 px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">
+              FAQ
+            </h2>
+
+            {/* FAQ Accordion */}
+            <Accordion
+              type="single"
+              collapsible
+              defaultValue="item-2"
+              className="space-y-4"
+            >
+              {faqData.map((faq) => (
+                <AccordionItem
+                  key={faq.id}
+                  value={faq.id}
+                  className=" rounded-2xl px-6 data-[state=open]:pb-2"
+                >
+                  <AccordionTrigger className="text-left hover:no-underline  rounded-xl px-0 py-6 text-lg font-semibold text-white [&[data-state=open]>svg]:rotate-180">
+                    {faq.question}
+                  </AccordionTrigger>
+                  {faq.answer && (
+                    <AccordionContent className="pb-6 pt-0">
+                      <div className=" pt-4">
+                        <p className="text-white/80 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </AccordionContent>
+                  )}
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
       </div>
     </section>
   );

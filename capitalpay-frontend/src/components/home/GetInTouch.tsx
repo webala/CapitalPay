@@ -13,6 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import Footer from "../Footer";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_URL || "http://localhost:5000/api";
@@ -88,8 +89,8 @@ const GetInTouch = () => {
 
   return (
     <div id="contact" className="w-full bg-[#010D50]">
-      <div className="max-w-6xl mx-auto py-9 md:py-12 px-8 md:px-0 ">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 border-b border-white">
+      <div className="max-w-6xl mx-auto py-9 md:py-12 px-8 md:px-4 lg:px-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left Side - Contact Form */}
 
           <div>
@@ -168,7 +169,7 @@ const GetInTouch = () => {
               </p>
             </div>
 
-            <div className="flex justify-start mb-12">
+            {/* <div className="flex justify-start mb-12">
               <div className="flex space-x-4">
                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                   <svg
@@ -198,7 +199,7 @@ const GetInTouch = () => {
                   </svg>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Contact Methods */}
             {/* <div className="space-y-4">
@@ -360,8 +361,8 @@ const GetInTouch = () => {
 
           {/* Right Side - Contact Information */}
         </div>
-        <p className="my-3">All rights reserved</p>
       </div>
+      <Footer />
     </div>
   );
 };

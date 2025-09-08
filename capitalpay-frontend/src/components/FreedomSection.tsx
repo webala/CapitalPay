@@ -111,7 +111,7 @@ const FreedomSection = () => {
               <img src={airtime} alt="airtime" />
               <div>
                 <h3 className="text-base font-medium text-foreground">
-                  CUSTOM INTEGRATIONS
+                  CUSTOMS INTEGRATIONS
                 </h3>
                 <p className="text-muted-foreground">
                   Enterprise-grade solutions adaptable to e-commerce, fintech,

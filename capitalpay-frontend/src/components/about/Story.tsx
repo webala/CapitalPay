@@ -21,8 +21,8 @@ const Story = () => {
                 operate through a network of specialized entities and
                 partnerships in each region to cater to specific market demands.
                 This allows us to push different agendas in different
-                markets—from customs and banking solutions in Tanzania to
-                advanced payment aggregation platforms in the UK—all under the
+                markets from customs and banking solutions in Tanzania to
+                advanced payment aggregation platforms in the UK, all under the
                 trusted Capital Pay International umbrella.
               </p>
             </div>
