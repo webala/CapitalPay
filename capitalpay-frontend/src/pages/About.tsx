@@ -47,10 +47,10 @@ const About = () => {
         />
       </div>
 
+      <Header />
+
       {/* Content with relative positioning */}
       <div className="relative z-10">
-        <Header />
-
         {/* About CapitalPay Hero Section */}
         <Hero />
       </div>

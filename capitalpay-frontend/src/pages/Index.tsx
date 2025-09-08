@@ -2,12 +2,6 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import FreedomSection from "@/components/FreedomSection";
 import BusinessSection from "@/components/BusinessSection";
-import ExploreSection from "@/components/ExploreSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import GetStartedSection from "@/components/GetStartedSection";
-import NewsSection from "@/components/NewsSection";
-import Footer from "@/components/Footer";
-import VirtualCardApplication from "@/components/VirtualCardApplication";
 import Story from "@/components/about/Story";
 import Timeline from "@/components/about/Timeline";
 import Mission from "@/components/about/Mission";
@@ -69,7 +63,7 @@ const Index = () => {
       {/* <GetStartedSection /> */}
       {/* <NewsSection /> */}
       {/* <VirtualCardApplication /> */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

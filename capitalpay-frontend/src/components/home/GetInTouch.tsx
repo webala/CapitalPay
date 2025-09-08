@@ -87,7 +87,7 @@ const GetInTouch = () => {
   };
 
   return (
-    <div className="w-full bg-[#010D50]">
+    <div id="contact" className="w-full bg-[#010D50]">
       <div className="max-w-6xl mx-auto py-9 md:py-12 px-8 md:px-0 ">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 border-b border-white">
           {/* Left Side - Contact Form */}
@@ -106,12 +106,66 @@ const GetInTouch = () => {
               OUR GLOBAL NETWORK
             </h2>
             <div className="text-white/80 leading-relaxed mb-8 space-y-1">
-              <p>Capital Pay UK</p>
-              <p>Capital Pay South Sudan</p>
-              <p>Capital Pay Philippines</p>
-              <p>Capital Pay Tanzania</p>
-              <p>Crawford Capital (Africa)</p>
-              <p>Capital Pay Kenya</p>
+              <p className="cursor-pointer">
+                <a
+                  href="https://capitalpay.co.uk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Capital Pay UK
+                </a>
+              </p>
+              <p className="cursor-pointer">
+                <a
+                  href="https://www.capitalpay.com.ss/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Capital Pay South Sudan
+                </a>
+              </p>
+              <p className="cursor-pointer">
+                <a
+                  href="https://capitalpay.com.ph/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Capital Pay Philippines
+                </a>
+              </p>
+              <p className="cursor-pointer">
+                <a
+                  href="https://capitalpay.co.tz/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Capital Pay Tanzania
+                </a>
+              </p>
+              <p className="cursor-pointer">
+                <a
+                  href="https://crawfordcapital.africa/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Crawford Capital (Africa)
+                </a>
+              </p>
+              <p className="cursor-pointer">
+                <a
+                  href="https://capitalpay.africa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Capital Pay Kenya
+                </a>
+              </p>
             </div>
 
             <div className="flex justify-start mb-12">

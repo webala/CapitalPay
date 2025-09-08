@@ -2,7 +2,7 @@ import planetImg from "@/assets/planet.png";
 
 const Mission = () => {
   return (
-    <section className="pt-10 px-8 ">
+    <section id="about" className="pt-10 px-8 ">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">
           From Africa to the World
@@ -43,6 +43,6 @@ const Mission = () => {
       </div>
     </section>
   );
-}
+};
 
-export default Mission
+export default Mission;

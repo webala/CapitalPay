@@ -4,27 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { BLOG_CATEGORIES } from "@/types/blog";
-
-// Static blog data
-const staticBlogData = {
-  _id: "static-blog-1",
-  title: "The Basics of Capital Pay",
-  slug: "basics-of-capital-pay",
-  excerpt:
-    "Learn everything you need to know about Capital Pay's innovative payment solutions and how they can transform your business.",
-  category: "FINANCE",
-  tags: ["payments", "fintech", "business", "digital payments", "security"],
-  author: {
-    name: "Sarah Johnson",
-    email: "sarah@capitalpay.com",
-  },
-  status: "published",
-  featured: true,
-  views: 1500,
-  readTime: 8,
-  createdAt: "2024-01-15T08:00:00.000Z",
-};
+import { blogPosts } from "@/data/blogs";
 
 // Helper function to format date
 const formatBlogDate = (dateString: string): string => {
@@ -43,12 +25,21 @@ const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [email, setEmail] = useState("");
 
-  // Static data - only show the blog if it matches the selected category
-  const featuredPost = staticBlogData;
-  const blogPosts =
-    selectedCategory === "all" || selectedCategory === staticBlogData.category
-      ? [staticBlogData]
-      : [];
+  // Filter blog posts based on category and search
+  const filteredPosts = blogPosts.filter((post) => {
+    const matchesCategory =
+      selectedCategory === "all" || post.category === selectedCategory;
+    const matchesSearch =
+      searchQuery === "" ||
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.tags.some((tag) =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    return matchesCategory && matchesSearch;
+  });
+
+  const featuredPost = blogPosts.find((post) => post.featured);
   const loading = false;
   const totalPages = 1;
 
@@ -315,8 +306,8 @@ const Blog = () => {
                   </div>
                 </div>
               ))
-            ) : blogPosts.length > 0 ? (
-              blogPosts.map((post) => (
+            ) : filteredPosts.length > 0 ? (
+              filteredPosts.map((post) => (
                 <Link
                   key={post._id}
                   to={`/blog/${post.slug}`}
@@ -362,14 +353,14 @@ const Blog = () => {
                     {/* Author Info */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                          <span className="text-white text-xs font-bold">
+                        <Avatar className="w-8 h-8">
+                          <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold">
                             {post.author.name
                               .split(" ")
                               .map((n) => n[0])
                               .join("")}
-                          </span>
-                        </div>
+                          </AvatarFallback>
+                        </Avatar>
                         <div>
                           <p className="text-white text-xs font-semibold">
                             {post.author.name}

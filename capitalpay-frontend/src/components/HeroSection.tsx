@@ -3,7 +3,7 @@ import hero from "@/assets/hero.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen bg-gradient-hero overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-hero overflow-hidden mt-32 lg:mt-0">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent/10" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />

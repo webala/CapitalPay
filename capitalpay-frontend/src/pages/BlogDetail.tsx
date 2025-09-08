@@ -1,28 +1,10 @@
-import { Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ArrowLeft, Clock, Eye, Share2 } from "lucide-react";
-
-// Static blog data
-const staticBlogData = {
-  _id: "static-blog-1",
-  title: "The Basics of Capital Pay",
-  slug: "basics-of-capital-pay",
-  excerpt:
-    "Learn everything you need to know about Capital Pay's innovative payment solutions and how they can transform your business.",
-  category: "FINANCE",
-  tags: ["payments", "fintech", "business", "digital payments", "security"],
-  author: {
-    name: "Sarah Johnson",
-    email: "sarah@capitalpay.com",
-  },
-  status: "published",
-  featured: true,
-  views: 1500,
-  readTime: 8,
-  createdAt: "2024-01-15T08:00:00.000Z",
-};
+import { blogPosts } from "@/data/blogs";
 
 // Helper function to format date
 const formatBlogDate = (dateString: string): string => {
@@ -36,32 +18,44 @@ const formatBlogDate = (dateString: string): string => {
 };
 
 const BlogDetail = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+
+  // Find the blog post by slug
+  const blogPost = blogPosts.find((post) => post.slug === slug);
+
+  // If blog post not found, redirect to blog page
+  if (!blogPost) {
+    navigate("/blog");
+    return null;
+  }
   return (
     <div className="min-h-screen">
       <Header />
 
       {/* Blog Detail Hero Section */}
-      <section className="py-20 px-8">
+      <section className="py-20 px-8 mt-10">
         <div className="max-w-4xl mx-auto">
           {/* Back Button */}
           <div className="mb-8">
-            <Link to="/blog">
-              <Button
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Blog
-              </Button>
-            </Link>
+            {/* <Link to="/blog"> */}
+            <Button
+              variant="outline"
+              onClick={() => navigate(-1)}
+              className="border-white/20 text-white hover:bg-white/10"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Blog
+            </Button>
+            {/* </Link> */}
           </div>
 
           {/* Category Badge */}
           <div className="mb-6">
             <span className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-              {staticBlogData.category}
+              {blogPost.category}
             </span>
-            {staticBlogData.featured && (
+            {blogPost.featured && (
               <span className="ml-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
                 FEATURED
               </span>
@@ -70,44 +64,44 @@ const BlogDetail = () => {
 
           {/* Blog Title */}
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            {staticBlogData.title}
+            {blogPost.title}
           </h1>
 
           {/* Blog Meta Info */}
           <div className="flex flex-wrap items-center gap-6 mb-8 text-white/60">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">
-                  {staticBlogData.author.name
+              <Avatar className="w-12 h-12">
+                <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-bold">
+                  {blogPost.author.name
                     .split(" ")
                     .map((n) => n[0])
                     .join("")}
-                </span>
-              </div>
+                </AvatarFallback>
+              </Avatar>
               <div>
                 <p className="text-white text-sm font-semibold">
-                  {staticBlogData.author.name}
+                  {blogPost.author.name}
                 </p>
                 <p className="text-white/60 text-sm">
-                  {formatBlogDate(staticBlogData.createdAt)}
+                  {formatBlogDate(blogPost.createdAt)}
                 </p>
               </div>
             </div>
             <div className="flex items-center space-x-4 text-sm">
               <div className="flex items-center space-x-1">
                 <Clock className="w-4 h-4" />
-                <span>{staticBlogData.readTime} min read</span>
+                <span>{blogPost.readTime} min read</span>
               </div>
               <div className="flex items-center space-x-1">
                 <Eye className="w-4 h-4" />
-                <span>{staticBlogData.views.toLocaleString()} views</span>
+                <span>{blogPost.views.toLocaleString()} views</span>
               </div>
             </div>
           </div>
 
           {/* Blog Excerpt */}
           <p className="text-white/80 text-lg leading-relaxed mb-8 max-w-3xl">
-            {staticBlogData.excerpt}
+            {blogPost.excerpt}
           </p>
 
           {/* Share Button */}
@@ -118,8 +112,8 @@ const BlogDetail = () => {
               onClick={() => {
                 if (navigator.share) {
                   navigator.share({
-                    title: staticBlogData.title,
-                    text: staticBlogData.excerpt,
+                    title: blogPost.title,
+                    text: blogPost.excerpt,
                     url: window.location.href,
                   });
                 } else {
@@ -183,134 +177,11 @@ const BlogDetail = () => {
           {/* Main Blog Content */}
           <div className="mb-16 prose prose-lg prose-invert max-w-none">
             <div className="text-white/80 leading-relaxed space-y-6">
-              <p className="text-lg">
-                Capital Pay is revolutionizing the way businesses handle
-                payments in the digital age. Our comprehensive platform combines
-                cutting-edge technology with user-friendly interfaces to create
-                a seamless payment experience for both businesses and their
-                customers.
-              </p>
-
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">
-                Understanding Capital Pay's Core Features
-              </h2>
-
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">
-                    1. Instant Payments
-                  </h3>
-                  <p>
-                    Our platform enables real-time payment processing, allowing
-                    businesses to receive funds instantly. This feature
-                    eliminates the traditional waiting periods associated with
-                    bank transfers and helps improve cash flow management.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">
-                    2. Security First Approach
-                  </h3>
-                  <p className="mb-3">
-                    We implement military-grade encryption and multiple layers
-                    of security protocols to ensure that every transaction is
-                    protected. Our system includes:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-white/70">
-                    <li>End-to-end encryption</li>
-                    <li>Two-factor authentication</li>
-                    <li>Real-time fraud detection</li>
-                    <li>Secure data storage</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">
-                    3. Multiple Payment Options
-                  </h3>
-                  <p className="mb-3">
-                    Capital Pay supports various payment methods including:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-white/70">
-                    <li>Credit and debit cards</li>
-                    <li>Bank transfers</li>
-                    <li>Digital wallets</li>
-                    <li>QR code payments</li>
-                    <li>Contactless payments</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">
-                    4. Business Analytics
-                  </h3>
-                  <p className="mb-3">
-                    Our platform provides detailed insights into your payment
-                    data:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-white/70">
-                    <li>Transaction history</li>
-                    <li>Revenue analytics</li>
-                    <li>Customer payment patterns</li>
-                    <li>Peak business hours</li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">
-                    5. Integration Capabilities
-                  </h3>
-                  <p className="mb-3">
-                    Capital Pay seamlessly integrates with popular business
-                    tools and platforms:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-white/70">
-                    <li>E-commerce platforms</li>
-                    <li>Accounting software</li>
-                    <li>CRM systems</li>
-                    <li>POS systems</li>
-                  </ul>
-                </div>
-              </div>
-
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">
-                Getting Started with Capital Pay
-              </h2>
-              <p className="mb-4">
-                Setting up your Capital Pay account is simple and
-                straightforward. Our onboarding process involves:
-              </p>
-              <ol className="list-decimal list-inside space-y-2 text-white/70">
-                <li>Creating your business profile</li>
-                <li>Verifying your identity</li>
-                <li>Connecting your bank account</li>
-                <li>Customizing your payment settings</li>
-                <li>Installing necessary integrations</li>
-              </ol>
-
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">
-                The Future of Payments
-              </h2>
-              <p className="mb-4">
-                As we continue to evolve, Capital Pay remains committed to
-                innovation and excellence in the payment processing industry.
-                Our roadmap includes expanding our services to include:
-              </p>
-              <ul className="list-disc list-inside space-y-1 text-white/70 mb-6">
-                <li>Advanced AI-powered fraud prevention</li>
-                <li>Enhanced cross-border payment capabilities</li>
-                <li>Expanded cryptocurrency support</li>
-                <li>Advanced loyalty program integration</li>
-              </ul>
-
-              <div className="bg-gradient-to-r from-pink-500/10 to-red-500/10 border border-pink-500/20 rounded-lg p-6 mt-8">
-                <p className="text-lg font-medium text-white">
-                  Join thousands of businesses already benefiting from Capital
-                  Pay's modern payment solutions and take your first step toward
-                  payment processing excellence.
+              {blogPost.content.map((paragraph, index) => (
+                <p key={index} className="text-lg">
+                  {paragraph}
                 </p>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -318,7 +189,7 @@ const BlogDetail = () => {
           <div className="mb-12">
             <h3 className="text-lg font-semibold text-white mb-4">Tags</h3>
             <div className="flex flex-wrap gap-2">
-              {staticBlogData.tags.map((tag, index) => (
+              {blogPost.tags.map((tag, index) => (
                 <span
                   key={index}
                   className="bg-white/10 text-white/80 px-3 py-1 rounded-full text-sm hover:bg-white/20 transition-colors cursor-pointer"
@@ -343,8 +214,8 @@ const BlogDetail = () => {
                 onClick={() => {
                   if (navigator.share) {
                     navigator.share({
-                      title: staticBlogData.title,
-                      text: staticBlogData.excerpt,
+                      title: blogPost.title,
+                      text: blogPost.excerpt,
                       url: window.location.href,
                     });
                   } else {

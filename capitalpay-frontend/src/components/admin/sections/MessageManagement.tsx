@@ -12,8 +12,6 @@ import {
   MailOpen,
   Reply,
   Check,
-  Clock,
-  AlertCircle,
   Building,
   User,
   Calendar,

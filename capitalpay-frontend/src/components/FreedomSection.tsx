@@ -7,7 +7,10 @@ import airtime from "@/assets/airtime.png";
 
 const FreedomSection = () => {
   return (
-    <section className="relative py-20 bg-gradient-to-b from-background to-secondary/20">
+    <section
+      id="business"
+      className="relative py-20 bg-gradient-to-b from-background to-secondary/20"
+    >
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Second radial gradient (pink/purple tones) - Top Right */}
@@ -38,14 +41,14 @@ const FreedomSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-3 md:gap-12 items-start max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-3 md:gap-6 items-start mx-auto">
           {/* Left - Features */}
 
-          <Card className="px-4 bg-[#002C62] max-h-[300px] border-none py-8 hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-3xl">
+          <Card className="px-4 bg-[#002C62] max-h-[250px] border-none py-8 hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-3xl">
             <div className="flex flex-col items-start space-y-4">
               <img src={moneyTransfer} alt="money-transfer" />
               <div>
-                <h3 className="text-lg font-bold text-foreground mb-2">
+                <h3 className="text-base font-medium text-foreground mb-2">
                   BULK AND PAYROLL PAYMENTS
                 </h3>
                 <p className="text-muted-foreground">
@@ -55,10 +58,10 @@ const FreedomSection = () => {
               </div>
             </div>
           </Card>
-          <Card className="px-4 bg-gradient-to-br h-full border-none overflow-hidden max-h-[350px] from-[#892887] via-[#E94258] to-[#F27224] h-full w-full border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
-            <div className="flex flex-col items-start overflow-y-hidden gap-3">
-              <div className="h-1/3">
-                <h3 className="text-lg font-bold text-foreground">
+          <Card className="px-4 bg-gradient-to-br border-none overflow-hidden p-3 pt-6 md:max-h-[300px] from-[#892887] via-[#E94258] to-[#F27224] h-full w-full border-border/50 hover:shadow-glow-primary/20 transition-all duration-300 rounded-2xl">
+            <div className="flex flex-col items-center overflow-y-hidden gap-3">
+              <div className="h-1/3 flex flex-col items-center">
+                <h3 className="text-base font-medium text-foreground">
                   CAPITAL PAY WALLET
                 </h3>
                 <p className="text-muted-foreground">
@@ -74,11 +77,11 @@ const FreedomSection = () => {
               />
             </div>
           </Card>
-          <Card className="px-4 bg-[#002C62] max-h-[300px]  py-8 border-none hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-2xl">
+          <Card className="px-4 bg-[#002C62] max-h-[250px]  py-8 border-none hover:shadow-glow-primary/20 h-full w-full transition-all duration-300 rounded-2xl">
             <div className="flex flex-col items-start space-y-4">
               <img src={wallet} alt="wallet" />
               <div>
-                <h3 className="text-lg font-bold text-foreground">
+                <h3 className="text-base font-medium text-foreground">
                   ENJOY MULTI-CURRENCY WALLETS
                 </h3>
                 <p className="text-muted-foreground">
@@ -93,7 +96,7 @@ const FreedomSection = () => {
             <div className="flex flex-col items-start space-y-4">
               <img src={airtime} alt="airtime" />
               <div>
-                <h3 className="text-lg font-bold text-foreground">
+                <h3 className="text-base font-medium text-foreground">
                   AIRTIME TOP-UP
                 </h3>
                 <p className="text-muted-foreground">
@@ -107,7 +110,7 @@ const FreedomSection = () => {
             <div className="flex flex-col items-start space-y-4">
               <img src={airtime} alt="airtime" />
               <div>
-                <h3 className="text-lg font-bold text-foreground">
+                <h3 className="text-base font-medium text-foreground">
                   CUSTOM INTEGRATIONS
                 </h3>
                 <p className="text-muted-foreground">
@@ -121,7 +124,7 @@ const FreedomSection = () => {
             <div className="flex flex-col items-start space-y-4">
               <img src={linkBank} alt="link-bank" />
               <div>
-                <h3 className="text-lg font-bold text-foreground">
+                <h3 className="text-base font-medium text-foreground">
                   LINK YOUR BANK ACCOUNTS
                 </h3>
                 <p className="text-muted-foreground">
